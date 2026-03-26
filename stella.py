@@ -1,13 +1,23 @@
-import json, os, time
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
 
-def run():
-    print("🌌 STELLA ETERNAL OS: ACTIVE")
-    print("Welcome Abir! Your system is running perfectly.")
-    # তোমার বাকি সব ফিচার এখানে সচল থাকবে
-    while True:
-        cmd = input("Stella > ")
-        if cmd == "exit": break
-        print(f"You said: {cmd}")
+class StellaApp(App):
+    def build(self):
+        self.layout = BoxLayout(orientation='vertical', padding=10)
+        self.label = Label(text="🌌 STELLA ETERNAL OS: ANDROID\nWelcome Abir!", font_size='20sp')
+        self.input = TextInput(hint_text='আবির, এখানে লিখো...', multiline=False)
+        self.input.bind(on_text_validate=self.on_enter)
+        
+        self.layout.add_widget(self.label)
+        self.layout.add_widget(self.input)
+        return self.layout
+
+    def on_enter(self, instance):
+        user_text = self.input.text
+        self.label.text = f"আবির বললে: {user_text}\n(প্রসেসিং হচ্ছে...)"
+        self.input.text = ""
 
 if __name__ == "__main__":
-    run()
+    StellaApp().run()
