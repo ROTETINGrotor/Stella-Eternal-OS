@@ -1,21 +1,18 @@
-name: Build Stella
+name: Build Android APK
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
-    - name: Install PyInstaller
-      run: pip install pyinstaller
-    - name: Build App
-      run: pyinstaller --onefile stella.py
-    - name: Upload
-      uses: actions/upload-artifact@v4
-      with:
-        name: Stella-App
-        path: dist/
+      - uses: actions/checkout@v4
+      - name: Build with Buildozer
+        uses: ArtemSerebrenninkov/buildozer-action@v1
+        with:
+          workdir: .
+          buildozer_version: master
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Stella-Android-App
+          path: bin/*.apk
