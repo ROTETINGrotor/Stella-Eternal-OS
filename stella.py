@@ -6,8 +6,8 @@ from kivy.uix.textinput import TextInput
 class StellaApp(App):
     def build(self):
         self.layout = BoxLayout(orientation='vertical', padding=10)
-        self.label = Label(text="🌌 STELLA ETERNAL OS: ANDROID\nWelcome Abir!", font_size='20sp')
-        self.input = TextInput(hint_text='আবির, এখানে লিখো...', multiline=False)
+        self.label = Label(text="🌌 STELLA ETERNAL OS: ANDROID\nWelcome Owner!", font_size='20sp')
+        self.input = TextInput(hint_text='Owner, write here...', multiline=False)
         self.input.bind(on_text_validate=self.on_enter)
         
         self.layout.add_widget(self.label)
@@ -16,7 +16,7 @@ class StellaApp(App):
 
     def on_enter(self, instance):
         user_text = self.input.text
-        self.label.text = f"আবির বললে: {user_text}\n(প্রসেসিং হচ্ছে...)"
+        self.label.text = f"Owner says: {user_text}\n(processing...)"
         self.input.text = ""
 
 if __name__ == "__main__":
